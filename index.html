@@ -1,245 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BHARAT — Smart Shopping</title>
+  <title>BHARAT — Online Shopping</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- ================= HEADER ================= -->
-  <header class="header">
-    <div class="container nav">
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">BHARAT</div>
 
-      <!-- LOGO -->
-      <div class="logo">BHARAT</div>
-
-      <!-- MOBILE MENU BUTTON -->
-      <button class="menu-btn" id="menuBtn">
-        ☰
-      </button>
-
-      <!-- NAV -->
-      <nav class="nav-links" id="navLinks">
-
-        <!-- SHOP DROPDOWN -->
-        <div class="nav-shop">
-          <button class="btn-primary shop-btn" id="shopBtn">
-            Shop
-          </button>
-
-          <div class="shop-dropdown" id="shopDropdown">
-            <a href="#fashion">Fashion</a>
-            <a href="#shoes">Shoes</a>
-            <a href="#electronics">Electronics</a>
-            <a href="#sports">Sports</a>
-          </div>
-        </div>
-
-        <!-- DESKTOP CART -->
-        <button class="cart-btn" id="cartBtn" aria-label="Cart">
-          🛒
-        </button>
-
-        <!-- MOBILE ONLY LINKS -->
-        <div class="mobile-only">
-          <a href="#">My Orders</a>
-          <a href="#">My Account</a>
-        </div>
-
-      </nav>
-    </div>
-    <!-- MOBILE SEARCH -->
-    <div class="mobile-search">
-      <input type="text" placeholder="Search products…" />
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search for Office chairs or anything" />
     </div>
 
-    <!-- MOBILE QUICK CATEGORIES -->
-    <div class="mobile-categories">
-      <button>Fashion</button>
-      <button>Shoes</button>
-      <button>Electronics</button>
-      <button>Sports</button>
+    <div class="header-icons">
+      <span>🔔</span>
+      <span id="cartIcon">🛒</span>
+      <span>👤</span>
     </div>
+  </div>
+</header>
 
-  </header>
+<!-- ================= MOBILE CATEGORY PILLS ================= -->
+<section class="mobile-categories">
+  <button data-category="clothes">Clothes</button>
+  <button data-category="shoes">Shoes</button>
+  <button data-category="sports">Sports</button>
+  <button data-category="accessories">Accessories</button>
+</section>
 
-  <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="container hero-content">
-      <h1>
-        Everything you need.<br />
-        <span>One clean marketplace.</span>
-      </h1>
-
-      <p>
-        Shop fashion, shoes, electronics & sports gear — built for quality,
-        comfort, and performance.
-      </p>
-
-      <div class="hero-actions">
-        <button class="btn-primary">Explore Products</button>
-        <button class="btn-secondary">View Deals</button>
-      </div>
-    </div>
-  </section>
-  <section class="mobile-deals">
-    <div class="deal-card">
-      <img src="assets/deal-1.jpg" alt="Deal">
-      <p>Up to 50% off · Fashion</p>
-    </div>
-
-    <div class="deal-card">
-      <img src="assets/deal-2.jpg" alt="Deal">
-      <p>Top Electronics Deals</p>
-    </div>
-  </section>
-
-  <!-- MOBILE BOTTOM NAV -->
-  <nav class="mobile-bottom-nav">
-    <button>🏠</button>
-    <button>👤</button>
-    <button>🛒</button>
-    <button>☰</button>
-  </nav>
-
-  <!-- ================= FASHION ================= -->
-  <section class="category-section" id="fashion">
-    <div class="container">
-      <h2 class="section-title">Fashion Picks</h2>
-
-      <div class="product-grid">
-
-        <!-- JACKET -->
-        <div class="product-card" data-title="Performance Jacket" data-price="₹1,899" data-size-type="alpha"
-          data-colors="Black,Olive,Brown" data-images="assets/jacket-1.jpg,assets/jacket-2.jpg,assets/jacket-3.jpg">
-          <div class="product-img">
-            <img src="assets/jacket-1.jpg" alt="Performance Jacket">
-          </div>
-          <h3>Performance Jacket</h3>
-          <p>₹1,899</p>
-          <button class="btn-primary">Add to Cart</button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= SHOES ================= -->
-  <section class="category-section" id="shoes">
-    <div class="container">
-      <h2 class="section-title">Shoes Collection</h2>
-
-      <div class="product-grid">
-
-        <!-- SNEAKERS -->
-        <div class="product-card" data-title="Minimal Sneakers" data-price="₹2,499" data-size-type="numeric"
-          data-images="assets/sneakers-1.jpg,assets/sneakers-2.jpg">
-          <div class="product-img">
-            <img src="assets/sneakers-1.jpg" alt="Minimal Sneakers">
-          </div>
-          <h3>Minimal Sneakers</h3>
-          <p>₹2,499</p>
-          <button class="btn-primary">Add to Cart</button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ELECTRONICS ================= -->
-  <section class="category-section" id="electronics">
-    <div class="container">
-      <h2 class="section-title">Electronics Deals</h2>
-
-      <div class="product-grid">
-
-        <!-- HEADPHONES -->
-        <div class="product-card" data-title="Wireless Headphones" data-price="₹3,999" data-colors="Black,White"
-          data-images="assets/headphones-1.jpg,assets/headphones-2.jpg">
-          <div class="product-img">
-            <img src="assets/headphones-1.jpg" alt="Wireless Headphones">
-          </div>
-          <h3>Wireless Headphones</h3>
-          <p>₹3,999</p>
-          <button class="btn-primary">Add to Cart</button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= SPORTS ================= -->
-  <section class="category-section" id="sports">
-    <div class="container">
-      <h2 class="section-title">Sports Essentials</h2>
-
-      <div class="product-grid">
-
-        <!-- BACKPACK -->
-        <div class="product-card" data-title="Sports Backpack" data-price="₹1,299"
-          data-images="assets/backpack-1.jpg,assets/backpack-2.jpg">
-          <div class="product-img">
-            <img src="assets/backpack-1.jpg" alt="Sports Backpack">
-          </div>
-          <h3>Sports Backpack</h3>
-          <p>₹1,299</p>
-          <button class="btn-primary">Add to Cart</button>
-        </div>
-
-        <!-- SPORTS SHOES (5th PRODUCT) -->
-        <div class="product-card" data-title="Training Shoes" data-price="₹2,199" data-size-type="numeric"
-          data-images="assets/training-1.jpg,assets/training-2.jpg">
-          <div class="product-img">
-            <img src="assets/training-1.jpg" alt="Training Shoes">
-          </div>
-          <h3>Training Shoes</h3>
-          <p>₹2,199</p>
-          <button class="btn-primary">Add to Cart</button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="container footer-content">
-      <p>© 2026 BHARAT. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Support</a>
-      </div>
-    </div>
-  </footer>
-  <!-- ================= MOBILE BOTTOM NAV ================= -->
-  <nav class="mobile-bottom-nav" id="mobileBottomNav">
-    <button data-action="home">🏠<span>Home</span></button>
-    <button data-action="account">👤<span>Account</span></button>
-    <button data-action="cart">🛒<span>Cart</span></button>
-    <button data-action="menu">☰<span>Menu</span></button>
-  </nav>
-
-  <!-- ================= MOBILE MENU PANEL ================= -->
-  <div class="mobile-menu" id="mobileMenu">
-    <h3>Shop</h3>
-    <a href="#fashion">Fashion</a>
-    <a href="#shoes">Shoes</a>
-    <a href="#electronics">Electronics</a>
-    <a href="#sports">Sports</a>
-
-    <hr />
-
-    <a href="#">My Orders</a>
-    <a href="#">My Account</a>
-    <a href="#">Support</a>
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-main">
+    <h2>Office Chairs<br><span>Minimum 45% Off</span></h2>
+    <p>Top Brands · Ergonomic · Mesh</p>
+    <img src="assets/chair.jpg" alt="Office Chair">
   </div>
 
-  <script src="script.js"></script>
-</body>
+  <div class="hero-side">
+    <img src="assets/shirt.jpg" alt="Fashion Model">
+    <img src="assets/shoes.jpg" alt="Fashion Model">
+    <img src="assets/bag.jpg" alt="Fashion Model">
+  
+  </div>
+</section>
 
+<!-- ================= PRODUCTS ================= -->
+<section class="section">
+  <h3>Deals for You</h3>
+
+  <div class="product-row" id="productRow">
+
+    <div class="product" data-name="Running Shoes">
+      <img src="assets/sneakers.jpg">
+      <h4>Running Shoes</h4>
+      <p class="price">₹1,299</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Cotton T-Shirt">
+      <img src="assets/jacket.jpg">
+      <h4>Cotton T-Shirt</h4>
+      <p class="price">₹399</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Sports Backpack">
+      <img src="assets/backpack.jpg">
+      <h4>Sports Backpack</h4>
+      <p class="price">₹899</p>
+      <button>Add to Cart</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  © 2026 BHARAT · All rights reserved
+</footer>
+
+<!-- ================= MOBILE BOTTOM NAV ================= -->
+<nav class="bottom-nav">
+  <div>🏠<span>Home</span></div>
+  <div>❤️<span>Wishlist</span></div>
+  <div>🛒<span>Cart</span></div>
+  <div>👤<span>Profile</span></div>
+</nav>
+
+<script src="script.js"></script>
+</body>
 </html>
