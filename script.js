@@ -15,7 +15,117 @@ document.querySelectorAll(".nav-links a").forEach(link => {
 });
 
 /* =================================================
-   PDP (PRODUCT DETAIL PAGE)
+   CART STATE
+================================================= */
+let cart = [];
+
+/* =================================================
+   CART DRAWER UI
+================================================= */
+const cartDrawer = document.createElement("div");
+cartDrawer.className = "cart-drawer";
+cartDrawer.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h3>Your Cart</h3>
+    <button id="cartCloseBtn" style="font-size:1.5rem;background:none;border:none;cursor:pointer;">×</button>
+  </div>
+
+  <div id="cartItems" style="margin-top:16px;"></div>
+
+  <p id="cartEmpty" style="margin-top:16px;color:#6b6b6b;">
+    Your cart is empty.
+  </p>
+
+  <button class="btn-primary" id="checkoutBtn" style="margin-top:24px;width:100%;">
+    Checkout
+  </button>
+`;
+document.body.appendChild(cartDrawer);
+
+const cartCloseBtn = document.getElementById("cartCloseBtn");
+
+cartCloseBtn.addEventListener("click", e => {
+  e.stopPropagation();
+  cartDrawer.classList.remove("active");
+});
+
+const cartItemsEl = document.getElementById("cartItems");
+const cartEmptyEl = document.getElementById("cartEmpty");
+
+/* =================================================
+   CART FUNCTIONS
+================================================= */
+function renderCart() {
+  cartItemsEl.innerHTML = "";
+
+  if (cart.length === 0) {
+    cartEmptyEl.style.display = "block";
+    return;
+  }
+
+  cartEmptyEl.style.display = "none";
+
+  cart.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.style.marginBottom = "14px";
+    div.innerHTML = `
+      <strong>${item.title}</strong><br>
+      <small>
+        ${item.size ? "Size: " + item.size + " · " : ""}
+        ${item.color ? "Color: " + item.color + " · " : ""}
+        Qty: ${item.qty}
+      </small><br>
+      <span>${item.price}</span><br>
+      <button data-index="${index}" style="margin-top:6px;">Remove</button>
+    `;
+    cartItemsEl.appendChild(div);
+  });
+
+  document.querySelectorAll("#cartItems button").forEach(btn => {
+    btn.onclick = () => {
+      cart.splice(btn.dataset.index, 1);
+      renderCart();
+    };
+  });
+}
+
+function addToCart(product) {
+  cart.push({
+    title: product.title,
+    price: product.price,
+    size: product.size,
+    color: product.color,
+    qty: 1
+  });
+
+  renderCart();
+  cartDrawer.classList.add("active");
+}
+
+/* =================================================
+   CART TOGGLE (IMPORTANT FIX)
+================================================= */
+const cartBtn = document.getElementById("cartBtn");
+
+cartBtn.addEventListener("click", e => {
+  e.stopPropagation();
+  cartDrawer.classList.toggle("active");
+});
+
+/* Prevent clicks inside cart from closing it */
+cartDrawer.addEventListener("click", e => {
+  e.stopPropagation();
+});
+
+/* Close cart only via ESC */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    cartDrawer.classList.remove("active");
+  }
+});
+
+/* =================================================
+   PDP ELEMENTS
 ================================================= */
 const pdpOverlay = document.getElementById("pdpOverlay");
 const pdpClose = document.getElementById("pdpClose");
@@ -30,67 +140,142 @@ const sizeGrid = document.getElementById("sizeGrid");
 const pdpColors = document.getElementById("pdpColors");
 const colorGrid = document.getElementById("colorGrid");
 
-/* Open PDP from product card */
+const pdpAddBtn = document.querySelector(".pdp-cta");
+const pdpHint = document.getElementById("pdpHint");
+
+/* PDP STATE */
+let selectedSize = null;
+let selectedColor = null;
+let sizeRequired = false;
+let colorRequired = false;
+let activeProduct = null;
+
+/* =================================================
+   PDP HELPERS
+================================================= */
+function resetPDP() {
+  selectedSize = null;
+  selectedColor = null;
+
+  pdpAddBtn.disabled = true;
+  pdpHint.textContent = "Select required options";
+
+  document.querySelectorAll(".size-grid button").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".color-grid button").forEach(b => b.classList.remove("active"));
+}
+
+function validatePDP() {
+  if (sizeRequired && !selectedSize) {
+    pdpAddBtn.disabled = true;
+    pdpHint.textContent = "Please select a size";
+    return;
+  }
+
+  if (colorRequired && !selectedColor) {
+    pdpAddBtn.disabled = true;
+    pdpHint.textContent = "Please select a color";
+    return;
+  }
+
+  pdpAddBtn.disabled = false;
+  pdpHint.textContent = "Ready to add to cart";
+}
+
+/* =================================================
+   OPEN PDP
+================================================= */
 document.querySelectorAll(".product-card").forEach(card => {
   card.addEventListener("click", e => {
-
-    /* prevent PDP opening when clicking button */
     if (e.target.tagName === "BUTTON") return;
 
-    /* BASIC DATA */
-    pdpTitle.textContent = card.dataset.title;
-    pdpPrice.textContent = card.dataset.price;
-    pdpImg.src = card.dataset.img;
-    pdpImg.alt = card.dataset.title;
+    activeProduct = {
+      title: card.dataset.title,
+      price: card.dataset.price
+    };
 
-    /* ================= SIZES LOGIC ================= */
+    pdpTitle.textContent = activeProduct.title;
+    pdpPrice.textContent = activeProduct.price;
+    pdpImg.src = card.dataset.img;
+
+    resetPDP();
+
+    /* ---------- SIZE LOGIC ---------- */
     sizeGrid.innerHTML = "";
     pdpSizes.style.display = "none";
+    sizeRequired = card.dataset.sizeType === "numeric" || card.dataset.sizeType === "alpha";
 
-    const sizeType = card.dataset.sizeType;
-
-    if (sizeType === "numeric") {
+    if (card.dataset.sizeType === "numeric") {
       pdpSizes.style.display = "block";
       [6,7,8,9,10,11].forEach(size => {
         const btn = document.createElement("button");
         btn.textContent = size;
+        btn.onclick = () => {
+          document.querySelectorAll(".size-grid button").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          selectedSize = size;
+          validatePDP();
+        };
         sizeGrid.appendChild(btn);
       });
     }
 
-    if (sizeType === "alpha") {
+    if (card.dataset.sizeType === "alpha") {
       pdpSizes.style.display = "block";
       ["S","M","L","XL","XXL"].forEach(size => {
         const btn = document.createElement("button");
         btn.textContent = size;
+        btn.onclick = () => {
+          document.querySelectorAll(".size-grid button").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          selectedSize = size;
+          validatePDP();
+        };
         sizeGrid.appendChild(btn);
       });
     }
 
-    /* ================= COLORS LOGIC ================= */
+    /* ---------- COLOR LOGIC ---------- */
     colorGrid.innerHTML = "";
     pdpColors.style.display = "none";
+    colorRequired = card.dataset.colors && card.dataset.colors.length > 0;
 
-    const colors = card.dataset.colors;
-
-    if (colors && colors.length > 0) {
+    if (colorRequired) {
       pdpColors.style.display = "block";
-
-      colors.split(",").forEach(color => {
+      card.dataset.colors.split(",").forEach(color => {
         const btn = document.createElement("button");
-        btn.title = color;
         btn.style.background = color.toLowerCase();
+        btn.onclick = () => {
+          document.querySelectorAll(".color-grid button").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          selectedColor = color;
+          validatePDP();
+        };
         colorGrid.appendChild(btn);
       });
     }
 
-    /* OPEN PDP */
+    validatePDP();
     pdpOverlay.classList.add("active");
   });
 });
 
+/* =================================================
+   PDP ACTIONS
+================================================= */
+pdpAddBtn.addEventListener("click", e => {
+  e.stopPropagation();
+
+  addToCart({
+    title: activeProduct.title,
+    price: activeProduct.price,
+    size: selectedSize,
+    color: selectedColor
+  });
+});
+
 /* Close PDP */
-pdpClose.addEventListener("click", () => {
+pdpClose.addEventListener("click", e => {
+  e.stopPropagation();
   pdpOverlay.classList.remove("active");
 });
 
@@ -100,49 +285,50 @@ pdpOverlay.addEventListener("click", e => {
   }
 });
 
-/* =================================================
-   CART DRAWER (SIMPLE & SAFE)
-================================================= */
-const cartDrawer = document.createElement("div");
-cartDrawer.className = "cart-drawer";
-cartDrawer.innerHTML = `
-  <h3>Your Cart</h3>
-  <p id="cartMsg" style="margin-top:16px;color:#6b6b6b;">
-    Your cart is empty.
-  </p>
-  <button class="btn-primary" style="margin-top:24px;width:100%;">
-    Checkout
-  </button>
-`;
-document.body.appendChild(cartDrawer);
 
-/* Add to Cart from product cards */
-document.querySelectorAll(".product-card .btn-primary").forEach(btn => {
-  btn.addEventListener("click", e => {
-    e.stopPropagation();
-    cartDrawer.classList.add("active");
-    document.getElementById("cartMsg").textContent =
-      "Item added to cart.";
-  });
+const shopBtn = document.getElementById("shopBtn");
+const shopDropdown = document.getElementById("shopDropdown");
+
+shopBtn.addEventListener("click", e => {
+  e.stopPropagation();
+  shopDropdown.style.display =
+    shopDropdown.style.display === "block" ? "none" : "block";
 });
 
-/* Add to Cart from PDP */
-const pdpAddBtn = document.querySelector(".pdp-cta");
-if (pdpAddBtn) {
-  pdpAddBtn.addEventListener("click", () => {
-    cartDrawer.classList.add("active");
-    document.getElementById("cartMsg").textContent =
-      "Item added to cart.";
-  });
-}
+/* Close dropdown when clicking outside */
+document.addEventListener("click", () => {
+  shopDropdown.style.display = "none";
+});
+/* =================================================
+   MOBILE NAV LOGIC
+================================================= */
+const mobileMenu = document.getElementById("mobileMenu");
+const mobileNav = document.getElementById("mobileBottomNav");
 
-/* Close cart when clicking outside */
-document.addEventListener("click", e => {
-  if (
-    cartDrawer.classList.contains("active") &&
-    !cartDrawer.contains(e.target) &&
-    !e.target.closest(".btn-primary")
-  ) {
-    cartDrawer.classList.remove("active");
+mobileNav.addEventListener("click", e => {
+  const action = e.target.closest("button")?.dataset.action;
+  if (!action) return;
+
+  if (action === "menu") {
+    mobileMenu.classList.toggle("active");
   }
+
+  if (action === "cart") {
+    cartDrawer.classList.add("active");
+  }
+
+  if (action === "home") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  if (action === "account") {
+    alert("Account page (future)");
+  }
+});
+
+/* Close mobile menu when clicking link */
+mobileMenu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.remove("active");
+  });
 });
