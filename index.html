@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,90 +10,129 @@
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<header class="header">
-  <div class="header-inner">
-    <div class="logo">BHARAT</div>
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">BHARAT</div>
 
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search for Office chairs or anything" />
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for Office chairs or anything" />
+      </div>
+
+      <div class="header-icons">
+        <button class="icon-btn" id="notifyBtn">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2a6 6 0 0 0-6 6v4l-2 2v1h16v-1l-2-2V8a6 6 0 0 0-6-6z" />
+          </svg>
+        </button>
+
+        <button class="icon-btn" id="cartBtn">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 4h-2l-1 2h2l3 9h8l3-7H7z" />
+          </svg>
+        </button>
+
+        <button class="icon-btn" id="profileBtn">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z" />
+          </svg>
+        </button>
+      </div>
+
+  </header>
+
+  <!-- ================= MOBILE CATEGORY PILLS ================= -->
+  <section class="mobile-categories">
+    <button data-category="clothes">Clothes</button>
+    <button data-category="shoes">Shoes</button>
+    <button data-category="sports">Sports</button>
+    <button data-category="accessories">Accessories</button>
+  </section>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero-main">
+      <h2>Office Chairs<br><span>Minimum 45% Off</span></h2>
+      <p>Top Brands · Ergonomic · Mesh</p>
+      <img src="assets/chair.jpg" alt="Office Chair">
     </div>
 
-    <div class="header-icons">
-      <span>🔔</span>
-      <span id="cartIcon">🛒</span>
-      <span>👤</span>
+    <div class="hero-side">
+      <img src="assets/shirt.jpg" alt="Fashion Model">
+      <img src="assets/shoes.jpg" alt="Fashion Model">
+      <img src="assets/bag.jpg" alt="Fashion Model">
+
     </div>
-  </div>
-</header>
+  </section>
 
-<!-- ================= MOBILE CATEGORY PILLS ================= -->
-<section class="mobile-categories">
-  <button data-category="clothes">Clothes</button>
-  <button data-category="shoes">Shoes</button>
-  <button data-category="sports">Sports</button>
-  <button data-category="accessories">Accessories</button>
-</section>
+  <!-- ================= PRODUCTS ================= -->
+  <section class="section">
+    <h3>Deals for You</h3>
 
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <div class="hero-main">
-    <h2>Office Chairs<br><span>Minimum 45% Off</span></h2>
-    <p>Top Brands · Ergonomic · Mesh</p>
-    <img src="assets/chair.jpg" alt="Office Chair">
-  </div>
+    <div class="product-row" id="productRow">
 
-  <div class="hero-side">
-    <img src="assets/shirt.jpg" alt="Fashion Model">
-    <img src="assets/shoes.jpg" alt="Fashion Model">
-    <img src="assets/bag.jpg" alt="Fashion Model">
-  
-  </div>
-</section>
+      <div class="product" data-name="Running Shoes">
+        <img src="assets/sneakers.jpg">
+        <h4>Running Shoes</h4>
+        <p class="price">₹1,299</p>
+        <button>Add to Cart</button>
+      </div>
 
-<!-- ================= PRODUCTS ================= -->
-<section class="section">
-  <h3>Deals for You</h3>
+      <div class="product" data-name="Cotton T-Shirt">
+        <img src="assets/jacket.jpg">
+        <h4>Cotton T-Shirt</h4>
+        <p class="price">₹399</p>
+        <button>Add to Cart</button>
+      </div>
 
-  <div class="product-row" id="productRow">
+      <div class="product" data-name="Sports Backpack">
+        <img src="assets/backpack.jpg">
+        <h4>Sports Backpack</h4>
+        <p class="price">₹899</p>
+        <button>Add to Cart</button>
+      </div>
 
-    <div class="product" data-name="Running Shoes">
-      <img src="assets/sneakers.jpg">
-      <h4>Running Shoes</h4>
-      <p class="price">₹1,299</p>
-      <button>Add to Cart</button>
     </div>
+  </section>
 
-    <div class="product" data-name="Cotton T-Shirt">
-      <img src="assets/jacket.jpg">
-      <h4>Cotton T-Shirt</h4>
-      <p class="price">₹399</p>
-      <button>Add to Cart</button>
-    </div>
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    © 2026 BHARAT · All rights reserved
+  </footer>
 
-    <div class="product" data-name="Sports Backpack">
-      <img src="assets/backpack.jpg">
-      <h4>Sports Backpack</h4>
-      <p class="price">₹899</p>
-      <button>Add to Cart</button>
-    </div>
+  <!-- ================= MOBILE BOTTOM NAV ================= -->
+  <nav class="bottom-nav">
+    <button class="icon-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 10l9-7 9 7v10h-6v-6H9v6H3z" />
+      </svg>
+      
+    </button>
 
-  </div>
-</section>
+    <button class="icon-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z" />
+      </svg>
+      
+    </button>
 
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-  © 2026 BHARAT · All rights reserved
-</footer>
+    <button class="icon-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M7 4h-2l-1 2h2l3 9h8l3-7H7z" />
+      </svg>
+      
+    </button>
 
-<!-- ================= MOBILE BOTTOM NAV ================= -->
-<nav class="bottom-nav">
-  <div>🏠<span>Home</span></div>
-  <div>❤️<span>Wishlist</span></div>
-  <div>🛒<span>Cart</span></div>
-  <div>👤<span>Profile</span></div>
-</nav>
+    <button class="icon-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z" />
+      </svg>
+      
+    </button>
+  </nav>
 
-<script src="script.js"></script>
+
+  <script src="script.js"></script>
 </body>
+
 </html>

@@ -147,3 +147,65 @@ body {
     display: none;
   }
 }
+
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+}
+
+.icon-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: #111;
+}
+
+
+@media (min-width: 1024px) {
+  .container,
+  .hero,
+  .section {
+    max-width: 1200px;
+    margin: auto;
+  }
+}
+@media (min-width: 1024px) {
+  .mobile-categories {
+    display: none;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: 2.5fr 1fr;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .hero-main img {
+    max-height: 420px;
+    object-fit: contain;
+  }
+
+  .hero-side {
+    grid-template-rows: 1fr 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .product-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    overflow: visible;
+  }
+
+  .product {
+    min-width: unset;
+  }
+}
+@media (min-width: 1024px) {
+  .section {
+    padding: 20px 0;
+  }
+}
