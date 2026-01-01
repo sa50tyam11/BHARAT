@@ -463,3 +463,276 @@ filter: brightness(0.85);
 .color-grid button.selected {
   outline: 2px solid var(--accent);
 }
+
+
+/* PDP selection states */
+.size-grid button,
+.color-grid button {
+  opacity: 0.6;
+}
+
+.size-grid button.active,
+.color-grid button.active {
+  opacity: 1;
+  outline: 2px solid var(--accent);
+}
+
+/* Disabled CTA */
+.pdp-cta:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Hint text */
+.pdp-hint {
+  margin: 12px 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+
+/* ================= CHECKOUT ================= */
+.checkout-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+}
+
+.checkout-overlay.active {
+  display: flex;
+}
+
+.checkout {
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  border-radius: var(--radius);
+}
+
+.checkout-summary {
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.checkout-summary div {
+  margin-bottom: 8px;
+}
+
+#checkoutForm input,
+#checkoutForm textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.checkout-close {
+  margin-top: 12px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+
+/* CART ICON */
+.cart-btn {
+  background: #f2f2f2;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* SHOP DROPDOWN */
+.nav-shop {
+  position: relative;
+}
+
+.shop-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.shop-dropdown {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  display: none;
+  min-width: 160px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.shop-dropdown a {
+  display: block;
+  padding: 8px 10px;
+  text-decoration: none;
+  color: #000;
+  border-radius: 8px;
+}
+
+.shop-dropdown a:hover {
+  background: #f5f5f5;
+}
+
+
+/* ================= MOBILE UI ================= */
+@media (max-width: 768px) {
+
+  /* Header tightening */
+  .nav {
+    height: 56px;
+  }
+
+  /* Mobile search */
+  .mobile-search {
+    padding: 12px;
+  }
+
+  .mobile-search input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+  }
+
+  /* Quick categories */
+  .mobile-categories {
+    display: flex;
+    gap: 10px;
+    padding: 10px 12px;
+    overflow-x: auto;
+  }
+
+  .mobile-categories button {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 0.9rem;
+  }
+
+  /* Deal cards */
+  .mobile-deals {
+    padding: 12px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .deal-card {
+    background: #f7f7f7;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .deal-card img {
+    width: 100%;
+    display: block;
+  }
+
+  .deal-card p {
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  /* Product grids become horizontal */
+  .product-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+  }
+
+  .product-card {
+    min-width: 70%;
+  }
+}
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #eee;
+  }
+
+  .mobile-bottom-nav button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+  }
+}
+/* ================= MOBILE NAV ================= */
+@media (max-width: 768px) {
+
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    z-index: 5000;
+  }
+
+  .mobile-bottom-nav button {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    transition: bottom 0.3s ease;
+    z-index: 6000;
+  }
+
+  .mobile-menu.active {
+    bottom: 56px;
+  }
+
+  .mobile-menu a {
+    display: block;
+    padding: 12px 0;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .mobile-menu hr {
+    margin: 16px 0;
+    border: none;
+    border-top: 1px solid #eee;
+  }
+}
